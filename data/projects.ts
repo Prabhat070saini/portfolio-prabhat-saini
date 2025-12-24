@@ -77,7 +77,7 @@ export const projects: Project[] = [
       { name: "MongoDB", icon: Icons.MongoDB },
       { name: "Tailwind CSS", icon: Icons.TailwindCSS },
     ],
-    githubLink: "https://github.com/Prabhat07saini/StudyNotion",
+    githubLink: "https://github.com/Prabhat070saini/StudyNotion",
     liveLink: "https://study-notion-edtech-project-beta-nine.vercel.app/",
   },
   {
@@ -94,7 +94,7 @@ export const projects: Project[] = [
       "Firebase",
       "OAuth",
     ],
-    githubLink: "https://github.com/Prabhat07saini",
+    githubLink: "https://github.com/Prabhat070saini",
   },
   {
     id: "5",
@@ -109,6 +109,6 @@ export const projects: Project[] = [
       { name: "MongoDB", icon: Icons.MongoDB },
       "Steganography",
     ],
-    githubLink: "https://github.com/Prabhat07saini",
+    githubLink: "https://github.com/Prabhat070saini",
   },
 ];

@@ -17,7 +17,7 @@ export const siteConfig = {
     "Event-Driven Systems",
   ],
   authors: [
-    { name: "Prabhat Saini", url: "https://github.com/Prabhat07saini" },
+    { name: "Prabhat Saini", url: "https://github.com/Prabhat070saini" },
   ],
   creator: "Prabhat Saini",
   logo: "PS",
@@ -33,7 +33,7 @@ export const siteConfig = {
   ],
 
   socialLinks: {
-    github: "https://github.com/Prabhat07saini",
+    github: "https://github.com/Prabhat070saini",
     linkedin: "https://www.linkedin.com/in/prabhat-saini-b81029220/",
     twitter: "https://twitter.com/", // Placeholder if needed
     email: "mailto:Prabhat07saini@gmail.com",

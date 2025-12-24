@@ -1,7 +1,8 @@
 export const getAdminNotificationHtml = (
   name: string,
   email: string,
-  message: string
+  message: string,
+  MobileNo?: string
 ) => {
   return `
     <p>You have a new contact request</p>
@@ -9,6 +10,7 @@ export const getAdminNotificationHtml = (
     <ul>  
       <li>Name: ${name}</li>
       <li>Email: ${email}</li>
+      <li>Mobile No: ${MobileNo || "N/A"}</li>
     </ul>
     <h3>Message</h3>
     <p>${message}</p>

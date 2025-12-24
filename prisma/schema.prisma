@@ -11,6 +11,7 @@ model ConnectionRequest {
   id             Int      @id @default(autoincrement())
   connectorEmail String
   connectorName  String
+  MobileNo       String?
   message        String
   createdAt      DateTime @default(now())
 }

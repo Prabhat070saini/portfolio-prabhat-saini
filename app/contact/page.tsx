@@ -17,6 +17,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    MobileNo: "",
     message: "",
   });
   const [isPending, startTransition] = useTransition();
@@ -36,7 +37,7 @@ export default function ContactPage() {
 
         if (response.ok) {
           toast.success(uiText.pages.contact.messages.success);
-          setFormData({ name: "", email: "", message: "" });
+          setFormData({ name: "", email: "", message: "", MobileNo: "" });
         } else {
           toast.error(uiText.pages.contact.messages.error);
         }
@@ -211,6 +212,24 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       placeholder={uiText.pages.contact.placeholders.email}
+                      className="bg-background"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="MobileNo"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      {uiText.pages.contact.labels.phone}
+                    </label>
+                    <Input
+                      id="MobileNo"
+                      name="MobileNo"
+                      type="tel"
+                      value={formData.MobileNo}
+                      onChange={handleChange}
+                      placeholder={uiText.pages.contact.placeholders.phone}
                       className="bg-background"
                     />
                   </div>

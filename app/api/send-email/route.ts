@@ -9,7 +9,7 @@ import {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, message } = body;
+    const { name, email, message, MobileNo } = body;
 
     // Validate input
     if (!name || !email || !message) {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     // 1. Trigger email sending in background (Fire-and-forget)
     // We do NOT await these promises so the response is fast
-    const adminHtml = getAdminNotificationHtml(name, email, message);
+    const adminHtml = getAdminNotificationHtml(name, email, message, MobileNo);
     const clientHtml = getClientThankYouHtml(name, message);
 
     const emailPromises = [
@@ -29,7 +29,9 @@ export async function POST(request: Request) {
         to: "prabhat07saini@gmail.com",
         subject: "New Connection Request from Portfolio",
         html: adminHtml,
-        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}\nMobileNo: ${
+          MobileNo || "N/A"
+        }`,
       }),
       sendMail({
         to: email,
@@ -50,6 +52,7 @@ export async function POST(request: Request) {
         connectorName: name,
         connectorEmail: email,
         message: message,
+        MobileNo: MobileNo,
       },
     });
 

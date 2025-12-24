@@ -29,6 +29,7 @@ export const uiText = {
       placeholders: {
         name: "Your name",
         email: "your.email@example.com",
+        phone: "your mobile number",
         message: "Tell me about your project or inquiry...",
       },
       buttons: {
