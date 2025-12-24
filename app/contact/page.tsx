@@ -1,52 +1,57 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Linkedin, Github, MapPin, Phone, Loader2 } from "lucide-react"
-import { useState } from "react"
+import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, Linkedin, Github, MapPin, Phone, Loader2 } from "lucide-react";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
+import { uiText } from "@/data/ui-text";
+import { siteConfig } from "@/config/site";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+    e.preventDefault();
 
-      if (response.ok) {
-        alert("Thank you for your message! I will get back to you soon.")
-        setFormData({ name: "", email: "", message: "" })
-      } else {
-        alert("Failed to send message. Please try again.")
+    startTransition(async () => {
+      try {
+        const response = await fetch("/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          toast.success(uiText.pages.contact.messages.success);
+          setFormData({ name: "", email: "", message: "" });
+        } else {
+          toast.error(uiText.pages.contact.messages.error);
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        toast.error(uiText.pages.contact.messages.errorGeneric);
       }
-    } catch (error) {
-      console.error("Error submitting form:", error)
-      alert("An error occurred. Please try again later.")
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+    });
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="min-h-screen">
@@ -63,7 +68,7 @@ export default function ContactPage() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold mb-6"
           >
-            Get in Touch
+            {uiText.pages.contact.title}
           </motion.h1>
 
           <motion.p
@@ -72,38 +77,51 @@ export default function ContactPage() {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground mb-12 leading-relaxed"
           >
-            Interested in collaborating or have a project in mind? Feel free to reach out. I'm always open to discussing
-            new opportunities and challenges.
+            {uiText.pages.contact.description}
           </motion.p>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
               <Card className="p-6 border-border bg-card h-full">
-                <h2 className="text-xl font-semibold mb-6">Contact Information</h2>
+                <h2 className="text-xl font-semibold mb-6">
+                  {uiText.pages.contact.sections.contactInfo}
+                </h2>
                 <div className="space-y-4">
                   <a
-                    href="mailto:Prabhat07saini@gmail.com"
+                    href={siteConfig.socialLinks.email}
                     className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
                   >
                     <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <Mail className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="font-medium">Prabhat07saini@gmail.com</p>
+                      <p className="text-sm text-muted-foreground">
+                        {uiText.pages.contact.labels.email}
+                      </p>
+                      <p className="font-medium">
+                        {siteConfig.contactInfo.email}
+                      </p>
                     </div>
                   </a>
 
                   <a
-                    href="tel:+918090104277"
+                    href={`tel:${siteConfig.contactInfo.phone}`}
                     className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
                   >
                     <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <Phone className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Phone</p>
-                      <p className="font-medium">+91 8090104277</p>
+                      <p className="text-sm text-muted-foreground">
+                        {uiText.pages.contact.labels.phone}
+                      </p>
+                      <p className="font-medium">
+                        {siteConfig.contactInfo.phone}
+                      </p>
                     </div>
                   </a>
 
@@ -112,17 +130,23 @@ export default function ContactPage() {
                       <MapPin className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Location</p>
-                      <p className="font-medium">Noida, Uttar Pradesh, India</p>
+                      <p className="text-sm text-muted-foreground">
+                        {uiText.pages.contact.labels.location}
+                      </p>
+                      <p className="font-medium">
+                        {siteConfig.contactInfo.address}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-border">
-                  <h3 className="text-sm font-semibold mb-4">Connect</h3>
+                  <h3 className="text-sm font-semibold mb-4">
+                    {uiText.pages.contact.sections.connect}
+                  </h3>
                   <div className="flex gap-4">
                     <a
-                      href="https://github.com/Prabhat07saini"
+                      href={siteConfig.socialLinks.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors"
@@ -131,7 +155,7 @@ export default function ContactPage() {
                       <span className="sr-only">GitHub</span>
                     </a>
                     <a
-                      href="https://www.linkedin.com/in/prabhat-saini-b81029220/"
+                      href={siteConfig.socialLinks.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors"
@@ -144,13 +168,22 @@ export default function ContactPage() {
               </Card>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
               <Card className="p-6 border-border bg-card">
-                <h2 className="text-xl font-semibold mb-6">Send a Message</h2>
+                <h2 className="text-xl font-semibold mb-6">
+                  {uiText.pages.contact.sections.sendMessage}
+                </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="text-sm font-medium mb-2 block">
-                      Name
+                    <label
+                      htmlFor="name"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      {uiText.pages.contact.labels.name}
                     </label>
                     <Input
                       id="name"
@@ -158,14 +191,17 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      placeholder="Your name"
+                      placeholder={uiText.pages.contact.placeholders.name}
                       className="bg-background"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="text-sm font-medium mb-2 block">
-                      Email
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      {uiText.pages.contact.labels.email}
                     </label>
                     <Input
                       id="email"
@@ -174,14 +210,17 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      placeholder="your.email@example.com"
+                      placeholder={uiText.pages.contact.placeholders.email}
                       className="bg-background"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="text-sm font-medium mb-2 block">
-                      Message
+                    <label
+                      htmlFor="message"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      {uiText.pages.contact.labels.message}
                     </label>
                     <Textarea
                       id="message"
@@ -189,20 +228,20 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      placeholder="Tell me about your project or inquiry..."
+                      placeholder={uiText.pages.contact.placeholders.message}
                       rows={6}
                       className="bg-background resize-none"
                     />
                   </div>
 
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? (
+                  <Button type="submit" className="w-full" disabled={isPending}>
+                    {isPending ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending...
+                        {uiText.pages.contact.buttons.sending}
                       </>
                     ) : (
-                      "Send Message"
+                      uiText.pages.contact.buttons.sendMessage
                     )}
                   </Button>
                 </form>
@@ -212,5 +251,5 @@ export default function ContactPage() {
         </motion.div>
       </main>
     </div>
-  )
+  );
 }

@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Icons } from "@/components/icons";
+import { siteConfig } from "@/config/site";
 
 export function Footer() {
   return (
@@ -6,37 +7,38 @@ export function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Prabhat Saini. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.name}.{" "}
+            {siteConfig.copyrightText}
           </p>
           <div className="flex gap-6">
             <a
-              href="https://github.com/Prabhat07saini"
+              href={siteConfig.socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5" />
+              <Icons.GitHub className="h-5 w-5" />
             </a>
             <a
-              href="https://www.linkedin.com/in/prabhat-saini-b81029220/"
+              href={siteConfig.socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5" />
+              <Icons.LinkedIn className="h-5 w-5" />
             </a>
             <a
-              href="mailto:Prabhat07saini@gmail.com"
+              href={siteConfig.socialLinks.email}
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Email"
             >
-              <Mail className="h-5 w-5" />
+              <Icons.Gmail className="h-5 w-5" />
             </a>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

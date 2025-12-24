@@ -10,26 +10,10 @@ import { ThemeProvider } from "@/components/theme-provider";
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Prabhat Saini - Backend Engineer",
-  description:
-    "Backend Engineer with 2+ years of experience in Go (Golang), Node.js, NestJS. Building scalable microservices and event-driven systems with Redis, RabbitMQ, PostgreSQL.",
-  keywords: [
-    "Backend Engineer",
-    "Golang",
-    "Go Developer",
-    "NestJS",
-    "Node.js",
-    "Microservices",
-    "Event-Driven Systems",
-  ],
-  authors: [{ name: "Prabhat Saini" }],
-  generator: "v0.app",
-  icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
-  },
-};
+import { siteMetadata } from "@/config/site";
+import { Toaster } from "@/components/ui/sonner";
+
+export const metadata: Metadata = siteMetadata;
 
 export default function RootLayout({
   children,
@@ -51,6 +35,7 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
         <Analytics />
+        <Toaster />
       </body>
     </html>
   );

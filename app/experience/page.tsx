@@ -1,36 +1,11 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Briefcase } from "lucide-react"
-
-const experiences = [
-  {
-    company: "Binmile Technology Pvt Ltd",
-    role: "Software Developer",
-    location: "Noida, UP",
-    duration: "June 2024 - Present",
-    achievements: [
-      "Partnered with cross-functional teams to integrate frontend features using Next.js, reducing API call failures by 25%",
-      "Constructed scalable backend systems for the WFM Adani project using MSSQL, Node.js, NestJS, Redis, and RabbitMQ, ensuring 99.9% uptime and handling 500+ concurrent requests per second",
-      "Engineered reusable Node.js packages, including a pluggable cache management service enabling runtime selection of providers (Redis/Memcached), plus utilities for HTTP abstraction, S3 uploads, and trace-ID–based centralized logging",
-      "Built reusable middleware (API key auth, RBAC, CORS, request validation), standardizing backend security and scalability across 10+ microservices",
-    ],
-    technologies: ["NestJS", "Node.js", "MSSQL", "Redis", "RabbitMQ", "Docker", "Next.js"],
-  },
-  {
-    company: "Stor Web",
-    role: "Backend Intern",
-    location: "Remote",
-    duration: "August 2023 – October 2023",
-    achievements: [
-      "Architected and deployed the backend for a Hostel Management System using Express.js and MongoDB, supporting 1,000+ users and reducing data retrieval time by 35%",
-      "Optimized API performance by creating efficient database schemas, decreasing query execution time by 50%",
-    ],
-    technologies: ["Express.js", "MongoDB", "Node.js", "REST API"],
-  },
-]
+import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Briefcase } from "lucide-react";
+import { experiences } from "@/data/experience";
+import { uiText } from "@/data/ui-text";
 
 export default function ExperiencePage() {
   return (
@@ -48,7 +23,7 @@ export default function ExperiencePage() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold mb-6"
           >
-            Experience
+            {uiText.pages.experience.title}
           </motion.h1>
 
           <motion.p
@@ -57,8 +32,7 @@ export default function ExperiencePage() {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground mb-12 leading-relaxed"
           >
-            Building production-grade systems for enterprise clients with focus on scalability, performance, and
-            reliability.
+            {uiText.pages.experience.description}
           </motion.p>
 
           <div className="space-y-8">
@@ -76,7 +50,9 @@ export default function ExperiencePage() {
                     </div>
                     <div className="flex-1">
                       <h2 className="text-xl font-semibold mb-1">{exp.role}</h2>
-                      <p className="text-muted-foreground mb-1">{exp.company}</p>
+                      <p className="text-base text-muted-foreground mb-1">
+                        {exp.company}
+                      </p>
                       <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
                         <span>{exp.location}</span>
                         <span>•</span>
@@ -89,7 +65,7 @@ export default function ExperiencePage() {
                     {exp.achievements.map((achievement, achievementIndex) => (
                       <li
                         key={achievementIndex}
-                        className="text-muted-foreground leading-relaxed pl-6 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary"
+                        className="text-sm text-muted-foreground leading-relaxed pl-6 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary"
                       >
                         {achievement}
                       </li>
@@ -97,11 +73,21 @@ export default function ExperiencePage() {
                   </ul>
 
                   <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="outline" className="font-normal">
-                        {tech}
-                      </Badge>
-                    ))}
+                    {exp.technologies.map((tech, techIndex) => {
+                      const name = typeof tech === "string" ? tech : tech.name;
+                      const Icon = typeof tech === "object" ? tech.icon : null;
+
+                      return (
+                        <Badge
+                          key={techIndex}
+                          variant="outline"
+                          className="px-3 py-1.5 text-sm font-medium flex items-center gap-2"
+                        >
+                          {Icon && <Icon className="h-5 w-5" />}
+                          {name}
+                        </Badge>
+                      );
+                    })}
                   </div>
                 </Card>
               </motion.div>
@@ -110,5 +96,5 @@ export default function ExperiencePage() {
         </motion.div>
       </main>
     </div>
-  )
+  );
 }
