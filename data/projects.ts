@@ -25,6 +25,7 @@ export const projects: Project[] = [
     techStack: [
       { name: "Go (Golang)", icon: Icons.Go },
       "Gin",
+      { name: "NestJS", icon: Icons.NestJS },
       { name: "MySQL", icon: Icons.MySQL },
       "KrakenD API Gateway",
       { name: "Redis", icon: Icons.Redis },
@@ -77,7 +78,7 @@ export const projects: Project[] = [
       { name: "MongoDB", icon: Icons.MongoDB },
       { name: "Tailwind CSS", icon: Icons.TailwindCSS },
     ],
-    githubLink: "https://github.com/Prabhat070saini/StudyNotion",
+    githubLink: "https://github.com/Prabhat070saini/BrainBoost",
     liveLink: "https://study-notion-edtech-project-beta-nine.vercel.app/",
   },
   {
@@ -94,7 +95,7 @@ export const projects: Project[] = [
       "Firebase",
       "OAuth",
     ],
-    githubLink: "https://github.com/Prabhat070saini",
+    githubLink: "https://github.com/Prabhat070saini/HomeSphere",
   },
   {
     id: "5",
@@ -109,6 +110,6 @@ export const projects: Project[] = [
       { name: "MongoDB", icon: Icons.MongoDB },
       "Steganography",
     ],
-    githubLink: "https://github.com/Prabhat070saini",
+    githubLink: "https://github.com/Prabhat070saini/Text_it",
   },
 ];
