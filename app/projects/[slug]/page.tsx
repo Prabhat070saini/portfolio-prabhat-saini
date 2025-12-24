@@ -34,7 +34,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
       <div className="container mx-auto px-4 max-w-4xl">
         <Link
           href="/projects"
-          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors cursor-pointer"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Projects
