@@ -79,7 +79,7 @@ export const projects: Project[] = [
       { name: "Tailwind CSS", icon: Icons.TailwindCSS },
     ],
     githubLink: "https://github.com/Prabhat070saini/BrainBoost",
-    liveLink: "https://study-notion-edtech-project-beta-nine.vercel.app/",
+    liveLink: "https://study-notionfd.vercel.app/",
   },
   {
     id: "4",
@@ -96,6 +96,7 @@ export const projects: Project[] = [
       "OAuth",
     ],
     githubLink: "https://github.com/Prabhat070saini/HomeSphere",
+    liveLink: "https://homesphere-4d63.onrender.com/",
   },
   {
     id: "5",
