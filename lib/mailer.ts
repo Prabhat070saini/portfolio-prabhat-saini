@@ -23,6 +23,13 @@ export const sendMail = async ({
   text?: string;
 }) => {
   try {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      return new Response(
+        JSON.stringify({ error: "Email service not configured" }),
+        { status: 500 }
+      );
+    }
+
     const mailOptions = {
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to,
