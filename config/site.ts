@@ -34,7 +34,7 @@ export const siteConfig = {
 
   socialLinks: {
     github: "https://github.com/Prabhat070saini",
-    linkedin: "https://www.linkedin.com/in/prabhat-saini-b81029220/",
+    linkedin: "https://www.linkedin.com/in/prabhat-saini22/",
     twitter: "https://twitter.com/", // Placeholder if needed
     email: "mailto:Prabhat07saini@gmail.com",
     resume: "/resume.pdf", // Placeholder
