@@ -91,7 +91,37 @@ export const projects: Project[] = [
     githubLink: "https://github.com/Prabhat070saini/coreGoboilerplatecode",
   },
   {
-    id: "4",
+  id: "4",
+  slug: "nestjs-backend-boilerplate",
+  name: "NestJS Backend Boilerplate (Enterprise Architecture)",
+  description:
+    "Reusable production-oriented NestJS backend foundation built with TypeScript, implementing modular architecture, JWT authentication, RBAC, PostgreSQL, Redis caching, RabbitMQ queues, and centralized configuration.",
+  longDescription:
+    "A reusable NestJS backend boilerplate designed to standardize enterprise-grade service architecture across projects. Built to eliminate repeated implementation of authentication, configuration, database access, caching, queues, validation, and logging. Emphasizes modular design, scalability, and testability for real-world backend systems.",
+  techStack: [
+    { name: "NestJS", icon: Icons.NestJS },
+    { name: "TypeScript", icon: Icons.TypeScript },
+    { name: "PostgreSQL", icon: Icons.PostgreSQL },
+    { name: "Redis", icon: Icons.Redis },
+    { name: "RabbitMQ", icon: Icons.RabbitMQ },
+    "TypeORM",
+    "JWT Authentication",
+    "RBAC",
+    "Modular Architecture",
+  ],
+  achievements: [
+    "Designed a modular NestJS architecture with clear separation of concerns",
+    "Implemented JWT-based authentication with role-based access control (RBAC)",
+    "Integrated PostgreSQL using TypeORM with migrations and seeding",
+    "Added Redis caching and RabbitMQ-based asynchronous processing",
+    "Built centralized configuration, validation, and structured logging",
+    "Implemented file upload and Excel processing workflows",
+  ],
+  githubLink: "https://github.com/Prabhat070saini/CodeNestBoilerPlateCode",
+}
+,
+  {
+    id: "5",
     slug: "studynotion",
     name: "StudyNotion",
     description:
@@ -109,7 +139,7 @@ export const projects: Project[] = [
     liveLink: "https://study-notionfd.vercel.app/",
   },
   {
-    id: "5",
+    id: "6",
     slug: "homesphere",
     name: "HomeSphere",
     description:
@@ -125,8 +155,8 @@ export const projects: Project[] = [
     githubLink: "https://github.com/Prabhat070saini/HomeSphere",
     liveLink: "https://homesphere-4d63.onrender.com/",
   },
-  {
-    id: "6",
+  { 
+    id: "7",
     slug: "text-it",
     name: "Text-it",
     description:
