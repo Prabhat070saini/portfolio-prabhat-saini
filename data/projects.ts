@@ -65,6 +65,33 @@ export const projects: Project[] = [
   },
   {
     id: "3",
+    slug: "go-backend-boilerplate",
+    name: "Go Backend Boilerplate (Clean Architecture)",
+    description:
+      "Reusable production-oriented Go backend foundation implementing Clean Architecture with JWT authentication, PostgreSQL migrations, Redis caching, structured logging, and AWS S3 integration.",
+    longDescription:
+      "A reusable backend boilerplate designed to standardize Go service architecture across projects. Built to avoid repeatedly implementing authentication, configuration, database access, caching, logging, and infrastructure wiring. Follows Clean Architecture principles to keep business logic independent of frameworks and external services.",
+    techStack: [
+      { name: "Go (Golang)", icon: Icons.Go },
+      "Gin",
+      { name: "PostgreSQL", icon: Icons.PostgreSQL },
+      { name: "Redis", icon: Icons.Redis },
+      "GORM",
+      "JWT Authentication",
+      "AWS S3",
+      "Clean Architecture",
+    ],
+    achievements: [
+      "Designed strict dependency boundaries using Clean Architecture principles",
+      "Implemented JWT-based authentication and authorization middleware",
+      "Integrated PostgreSQL with migrations and repository pattern",
+      "Added Redis caching and AWS S3 client abstractions",
+      "Built environment-based configuration and structured logging with Zap",
+    ],
+    githubLink: "https://github.com/Prabhat070saini/coreGoboilerplatecode",
+  },
+  {
+    id: "4",
     slug: "studynotion",
     name: "StudyNotion",
     description:
@@ -82,7 +109,7 @@ export const projects: Project[] = [
     liveLink: "https://study-notionfd.vercel.app/",
   },
   {
-    id: "4",
+    id: "5",
     slug: "homesphere",
     name: "HomeSphere",
     description:
@@ -99,7 +126,7 @@ export const projects: Project[] = [
     liveLink: "https://homesphere-4d63.onrender.com/",
   },
   {
-    id: "5",
+    id: "6",
     slug: "text-it",
     name: "Text-it",
     description:
