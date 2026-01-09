@@ -46,7 +46,12 @@ export default function CertificationsPage() {
               >
                 <Card className="p-6 border-border bg-card hover:bg-card/80 transition-colors">
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                    <div className="space-y-2">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <cert.icon className="h-6 w-6 text-primary" />
+                      </div>
+                    </div>
+                    <div className="space-y-2 flex-grow">
                       <div>
                         <h2 className="text-xl font-semibold mb-1">
                           {cert.title}

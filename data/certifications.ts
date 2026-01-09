@@ -1,3 +1,6 @@
+import { LucideIcon } from "lucide-react";
+import { AWSIcon, UdemyIcon } from "@/components/icons";
+
 export interface Certification {
   title: string;
   issuer: string;
@@ -5,6 +8,7 @@ export interface Certification {
   link: string;
   credentialId?: string;
   description?: string;
+  icon: any;
 }
 
 export const certifications: Certification[] = [
@@ -16,6 +20,7 @@ export const certifications: Certification[] = [
     credentialId: "UC-5ac740d5-a655-4111-8ce8-ee638526e983",
     description:
       "Focused on how real backend systems are designed, built, and operated. Covered core backend fundamentals including designing scalable services using Go, database modeling with PostgreSQL, gRPC services, Kubernetes orchestration, and clean architecture principles.",
+    icon: UdemyIcon,
   },
   {
     title: "Fundamentals of Database Engineering",
@@ -25,6 +30,7 @@ export const certifications: Certification[] = [
     credentialId: "UC-ac814179-1214-4a2a-89da-f00cddf679d8",
     description:
       "Deepened understanding of database internals, indexing, transactions, query optimization, and system design principles that power modern databases.",
+    icon: UdemyIcon,
   },
   {
     title: "AWS Academy Cloud Foundations",
@@ -33,5 +39,6 @@ export const certifications: Certification[] = [
     link: "https://www.credly.com/badges/921b1b24-a5c2-4ee6-8e5a-20bb3547c637/linked_in?t=sa5fmm",
     description:
       "Gained a foundational understanding of AWS Cloud concepts, security, architecture, pricing, and support.",
+    icon: AWSIcon,
   },
 ];

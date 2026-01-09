@@ -48,25 +48,32 @@ export default function PublicationsPage() {
                 <Card className="p-6 border-border bg-card hover:bg-card/80 transition-colors">
                   <div className="flex flex-col gap-4">
                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                      <div className="space-y-2">
-                        <h2 className="text-xl font-semibold leading-tight">
-                          {pub.title}
-                        </h2>
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                          <span className="font-medium text-foreground flex items-center gap-1">
-                            <BookOpen className="h-4 w-4" />
-                            {pub.publisher}
-                          </span>
-                          <span>•</span>
-                          <span>{pub.date}</span>
-                          {pub.publicationType && (
-                            <>
-                              <span>•</span>
-                              <Badge variant="secondary" className="text-xs">
-                                {pub.publicationType}
-                              </Badge>
-                            </>
-                          )}
+                      <div className="flex gap-4 flex-grow">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="p-2 rounded-lg bg-primary/10">
+                            <pub.icon className="h-6 w-6 text-primary" />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <h2 className="text-xl font-semibold leading-tight">
+                            {pub.title}
+                          </h2>
+                          <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                            <span className="font-medium text-foreground flex items-center gap-1">
+                              <BookOpen className="h-4 w-4" />
+                              {pub.publisher}
+                            </span>
+                            <span>•</span>
+                            <span>{pub.date}</span>
+                            {pub.publicationType && (
+                              <>
+                                <span>•</span>
+                                <Badge variant="secondary" className="text-xs">
+                                  {pub.publicationType}
+                                </Badge>
+                              </>
+                            )}
+                          </div>
                         </div>
                       </div>
                       <Link
