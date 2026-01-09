@@ -41,7 +41,7 @@ export const aboutContent = {
         institution: "KIET Group of Institutions, Affiliated to AKTU",
         location: "Ghaziabad, UP",
         duration: "Nov 2020 – Jun 2024",
-        cgpa: "7.5",
+        cgpa: "7.85 CGPA",
       },
       {
         degree: "Intermediate (XII) - CBSE Board",
