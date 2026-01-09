@@ -8,23 +8,38 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Linkedin, Github, MapPin, Phone, Loader2 } from "lucide-react";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { toast } from "sonner";
 import { uiText } from "@/data/ui-text";
 import { siteConfig } from "@/config/site";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  contactFormSchema,
+  type ContactFormData,
+} from "@/lib/validations/contact";
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    MobileNo: "",
-    message: "",
-  });
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    mode: "onBlur", // Validate on blur (when user leaves the field)
+    reValidateMode: "onChange", // Re-validate on change after first validation
+    defaultValues: {
+      name: "",
+      email: "",
+      MobileNo: "",
+      message: "",
+    },
+  });
 
+  const onSubmit = (data: ContactFormData) => {
     startTransition(async () => {
       try {
         const response = await fetch("/api/send-email", {
@@ -32,12 +47,12 @@ export default function ContactPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(data),
         });
 
         if (response.ok) {
           toast.success(uiText.pages.contact.messages.success);
-          setFormData({ name: "", email: "", message: "", MobileNo: "" });
+          reset();
         } else {
           toast.error(uiText.pages.contact.messages.error);
         }
@@ -46,12 +61,6 @@ export default function ContactPage() {
         toast.error(uiText.pages.contact.messages.errorGeneric);
       }
     });
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -178,7 +187,7 @@ export default function ContactPage() {
                 <h2 className="text-xl font-semibold mb-6">
                   {uiText.pages.contact.sections.sendMessage}
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div>
                     <label
                       htmlFor="name"
@@ -188,13 +197,15 @@ export default function ContactPage() {
                     </label>
                     <Input
                       id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
+                      {...register("name")}
                       placeholder={uiText.pages.contact.placeholders.name}
                       className="bg-background"
                     />
+                    {errors.name && (
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors.name.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -206,14 +217,16 @@ export default function ContactPage() {
                     </label>
                     <Input
                       id="email"
-                      name="email"
                       type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
+                      {...register("email")}
                       placeholder={uiText.pages.contact.placeholders.email}
                       className="bg-background"
                     />
+                    {errors.email && (
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors.email.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -225,13 +238,23 @@ export default function ContactPage() {
                     </label>
                     <Input
                       id="MobileNo"
-                      name="MobileNo"
                       type="tel"
-                      value={formData.MobileNo}
-                      onChange={handleChange}
+                      {...register("MobileNo", {
+                        onChange: (e) => {
+                          // Only allow numbers and limit to 10 digits
+                          const value = e.target.value.replace(/\D/g, "");
+                          e.target.value = value.slice(0, 10);
+                        },
+                      })}
+                      maxLength={10}
                       placeholder={uiText.pages.contact.placeholders.phone}
                       className="bg-background"
                     />
+                    {errors.MobileNo && (
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors.MobileNo.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -243,14 +266,16 @@ export default function ContactPage() {
                     </label>
                     <Textarea
                       id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
+                      {...register("message")}
                       placeholder={uiText.pages.contact.placeholders.message}
                       rows={6}
                       className="bg-background resize-none"
                     />
+                    {errors.message && (
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors.message.message}
+                      </p>
+                    )}
                   </div>
 
                   <Button type="submit" className="w-full" disabled={isPending}>
