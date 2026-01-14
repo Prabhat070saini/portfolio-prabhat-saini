@@ -25,7 +25,6 @@ export const projects: Project[] = [
     techStack: [
       { name: "Go (Golang)", icon: Icons.Go },
       "Gin",
-      { name: "NestJS", icon: Icons.NestJS },
       { name: "MySQL", icon: Icons.MySQL },
       "KrakenD API Gateway",
       { name: "Redis", icon: Icons.Redis },
