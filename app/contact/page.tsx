@@ -15,8 +15,8 @@ import { siteConfig } from "@/config/site";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  contactFormSchema,
-  type ContactFormData,
+  contactInputSchema,
+  type ContactInput,
 } from "@/lib/validations/contact";
 
 export default function ContactPage() {
@@ -27,8 +27,8 @@ export default function ContactPage() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
+  } = useForm<ContactInput>({
+    resolver: zodResolver(contactInputSchema),
     mode: "onBlur", // Validate on blur (when user leaves the field)
     reValidateMode: "onChange", // Re-validate on change after first validation
     defaultValues: {
@@ -39,7 +39,7 @@ export default function ContactPage() {
     },
   });
 
-  const onSubmit = (data: ContactFormData) => {
+  const onSubmit = (data: ContactInput) => {
     startTransition(async () => {
       try {
         const response = await fetch("/api/send-email", {

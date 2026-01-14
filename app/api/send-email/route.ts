@@ -5,19 +5,25 @@ import {
   getAdminNotificationHtml,
   getClientThankYouHtml,
 } from "@/lib/email-templates";
+import { contactInputSchema } from "@/lib/validations/contact";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, message, MobileNo } = body;
+    // Validate input using Zod schema
+    const validationResult = contactInputSchema.safeParse(body);
 
-    // Validate input
-    if (!name || !email || !message) {
+    if (!validationResult.success) {
       return NextResponse.json(
-        { error: "Missing required fields" },
+        {
+          error: "Validation failed",
+          details: validationResult.error.flatten().fieldErrors,
+        },
         { status: 400 }
       );
     }
+
+    const { name, email, message, MobileNo } = validationResult.data;
 
     // 1. Trigger email sending in background (Fire-and-forget)
     // We do NOT await these promises so the response is fast
@@ -47,7 +53,7 @@ export async function POST(request: Request) {
     );
 
     // 2. Insert data into the database (Synchronous - Await this)
-    const newRequest = await prisma.connectionRequest.create({
+    await prisma.connectionRequest.create({
       data: {
         connectorName: name,
         connectorEmail: email,
@@ -57,7 +63,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(
-      { message: "Request saved and emails queued", data: newRequest },
+      { message: "SUCCESS", data: null },
       { status: 200 }
     );
   } catch (error) {

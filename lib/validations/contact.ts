@@ -1,10 +1,10 @@
 import * as z from "zod";
 
 /**
- * Contact form validation schema
- * Validates name, email, phone number, and message fields
+ * Input schema for Contact Form
+ * Validates data sent from the client
  */
-export const contactFormSchema = z.object({
+export const contactInputSchema = z.object({
   name: z
     .string()
     .min(1, "Name is required")
@@ -36,6 +36,16 @@ export const contactFormSchema = z.object({
 });
 
 /**
- * Inferred TypeScript type from the contact form schema
+ * Output schema for Contact Form API response
+ * Validates data returned to the client
  */
-export type ContactFormData = z.infer<typeof contactFormSchema>;
+export const contactOutputSchema = z.object({
+  message: z.string(),
+  data: z.null(),
+});
+
+/**
+ * Inferred Types
+ */
+export type ContactInput = z.infer<typeof contactInputSchema>;
+export type ContactOutput = z.infer<typeof contactOutputSchema>;
