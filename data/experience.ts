@@ -1,4 +1,5 @@
 import { Icons } from "@/components/icons";
+import { Icon } from "lucide-react";
 
 export const experiences = [
   {
@@ -15,14 +16,19 @@ export const experiences = [
     technologies: [
       { name: "NestJS", icon: Icons.NestJS },
       { name: "Node.js", icon: Icons.NodeJS },
+      { name: "Go (Golang)", icon: Icons.Go },
+      { name: "Gin", icon: null },
       { name: "MSSQL", icon: null },
+      { name: "MySQL", icon: Icons.MySQL },
+      { name: "PostgreSQL", icon: Icons.PostgreSQL },
       { name: "Redis", icon: Icons.Redis },
       { name: "RabbitMQ", icon: Icons.RabbitMQ },
       { name: "Docker", icon: Icons.Docker },
+      { name: "KrakenD API Gateway", icon: null },
       { name: "Next.js", icon: Icons.NextJS },
     ],
   },
-  {
+  { 
     company: "Stor Web",
     role: "Backend Intern",
     location: "Remote",

@@ -1,3 +1,14 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+        "cSpell.words": [
+        "Adani",
+        "GORM",
+        "homesphere",
+        "ICCCNT",
+        "MERN",
+        "Prabhat",
+        "Saini",
+        "steganography",
+        "studynotion"
+    ]
 }
