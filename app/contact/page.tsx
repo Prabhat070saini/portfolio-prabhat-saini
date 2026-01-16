@@ -1,6 +1,6 @@
 "use client";
 
-import type React from "react";
+import React, { useTransition, useState } from "react";
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -16,7 +16,6 @@ import {
   Loader2,
   FileText,
 } from "lucide-react";
-import { useTransition } from "react";
 import { toast } from "sonner";
 import { uiText } from "@/data/ui-text";
 import { siteConfig } from "@/config/site";
@@ -29,6 +28,16 @@ import {
 
 export default function ContactPage() {
   const [isPending, startTransition] = useTransition();
+  const [isDownloadingResume, setIsDownloadingResume] = useState(false);
+
+  const handleResumeDownload = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsDownloadingResume(true);
+    window.location.href = siteConfig.socialLinks.resume;
+    setTimeout(() => {
+      setIsDownloadingResume(false);
+    }, 3000);
+  };
 
   const {
     register,
@@ -159,17 +168,21 @@ export default function ContactPage() {
                 </div>
                 <a
                   href={siteConfig.socialLinks.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
-                  download
+                  onClick={handleResumeDownload}
+                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-pointer"
                 >
                   <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <FileText className="h-5 w-5 text-primary" />
+                    {isDownloadingResume ? (
+                      <Loader2 className="h-5 w-5 text-primary animate-spin" />
+                    ) : (
+                      <FileText className="h-5 w-5 text-primary" />
+                    )}
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Resume</p>
-                    <p className="font-medium">Download CV</p>
+                    <p className="font-medium">
+                      {isDownloadingResume ? "Downloading..." : "Download CV"}
+                    </p>
                   </div>
                 </a>
 

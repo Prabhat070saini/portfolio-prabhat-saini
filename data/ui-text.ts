@@ -13,7 +13,7 @@ export const uiText = {
     contact: {
       title: "Get in Touch",
       description:
-        "Interested in collaborating or have a project in mind? Feel free to reach out. I'm always open to discussing new opportunities and challenges.",
+        "I am currently available for new job opportunities and freelance projects. Whether you have a challenging problem to solve, a project in mind, or just want to connect, feel free to reach out.",
       sections: {
         contactInfo: "Contact Information",
         sendMessage: "Send a Message",

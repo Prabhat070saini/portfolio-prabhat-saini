@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Github, Linkedin, Mail, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ResumeDownloadButton } from "@/components/resume-download-button";
 import { homeContent } from "@/data/home";
 import { siteConfig } from "@/config/site";
 
@@ -69,17 +70,10 @@ export default function HomePage() {
                 {homeContent.buttons.contactMe}
               </Button>
             </Link>
-            <a
-              href={siteConfig.socialLinks.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-            >
-              <Button size="lg" variant="outline">
-                {homeContent.buttons.downloadCV}
-                <FileText className="ml-2 h-4 w-4" />
-              </Button>
-            </a>
+            <ResumeDownloadButton size="lg" variant="outline">
+              {homeContent.buttons.downloadCV}
+              <FileText className="ml-2 h-4 w-4" />
+            </ResumeDownloadButton>
           </motion.div>
 
           <motion.div

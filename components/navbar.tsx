@@ -142,6 +142,13 @@ export function Navbar() {
                   </Button>
                 </Link>
               ))}
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block pt-2"
+              >
+                <Button className="w-full justify-center">Hire Me</Button>
+              </Link>
             </div>
           </motion.div>
         )}
