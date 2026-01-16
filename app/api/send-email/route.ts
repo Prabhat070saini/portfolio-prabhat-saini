@@ -6,6 +6,7 @@ import {
   getClientThankYouHtml,
 } from "@/lib/email-templates";
 import { contactInputSchema } from "@/lib/validations/contact";
+import { siteConfig } from "@/config/site";
 
 export async function POST(request: Request) {
   try {
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
 
     const emailPromises = [
       sendMail({
-        to: "prabhat07saini@gmail.com",
+        to: siteConfig.contactInfo.email,
         subject: "New Connection Request from Portfolio",
         html: adminHtml,
         text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}\nMobileNo: ${
@@ -48,9 +49,12 @@ export async function POST(request: Request) {
     ];
 
     // Catch any errors in the background tasks so they don't cause unhandled rejections
-    Promise.all(emailPromises).catch((err) =>
-      console.error("Error causing background emails to fail:", err)
-    );
+    // Catch any errors in the background tasks so they don't cause unhandled rejections
+    try {
+      await Promise.all(emailPromises);
+    } catch (err) {
+      console.error("Error sending emails:", err);
+    }
 
     // 2. Insert data into the database (Synchronous - Await this)
     await prisma.connectionRequest.create({

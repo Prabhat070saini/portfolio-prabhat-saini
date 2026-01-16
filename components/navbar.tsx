@@ -59,15 +59,17 @@ function NavLinks({
   return (
     <>
       {siteConfig.navLinks.map((item) => (
-        <Link key={item.href} href={item.href} onClick={onClick}>
-          <Button
-            variant="ghost"
-            className={cn(
-              "relative w-full md:w-auto justify-start md:justify-center",
-              pathname === item.href &&
-                "text-foreground bg-accent md:bg-transparent"
-            )}
-          >
+        <Button
+          key={item.href}
+          variant="ghost"
+          asChild
+          className={cn(
+            "relative w-full md:w-auto justify-start md:justify-center",
+            pathname === item.href &&
+              "text-foreground bg-accent md:bg-transparent"
+          )}
+        >
+          <Link href={item.href} onClick={onClick}>
             {item.name}
             {pathname === item.href && (
               <motion.div
@@ -80,8 +82,8 @@ function NavLinks({
                 }}
               />
             )}
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       ))}
     </>
   );
@@ -112,11 +114,9 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             <NavLinks pathname={pathname} />
-            <Link href="/contact" className="ml-4">
-              <Button variant="default" size="sm">
-                Hire Me
-              </Button>
-            </Link>
+            <Button variant="default" size="sm" asChild className="ml-4">
+              <Link href="/contact">Hire Me</Link>
+            </Button>
             <div className="ml-2">
               <ThemeToggle />
             </div>
@@ -156,13 +156,14 @@ export function Navbar() {
                   pathname={pathname}
                   onClick={() => setMobileMenuOpen(false)}
                 />
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block pt-2"
-                >
-                  <Button className="w-full justify-center">Hire Me</Button>
-                </Link>
+                <Button asChild className="w-full justify-center mt-2">
+                  <Link
+                    href="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Hire Me
+                  </Link>
+                </Button>
               </div>
             </motion.div>
           )}

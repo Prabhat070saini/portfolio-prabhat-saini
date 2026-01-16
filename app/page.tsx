@@ -59,17 +59,15 @@ export default function HomePage() {
             transition={{ delay: 0.5 }}
             className="flex flex-wrap gap-4 mb-16"
           >
-            <Link href="/projects">
-              <Button size="lg" className="group">
+            <Button size="lg" className="group" asChild>
+              <Link href="/projects">
                 {homeContent.buttons.viewProjects}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline">
-                {homeContent.buttons.contactMe}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/contact">{homeContent.buttons.contactMe}</Link>
+            </Button>
             <ResumeDownloadButton size="lg" variant="outline">
               {homeContent.buttons.downloadCV}
               <FileText className="ml-2 h-4 w-4" />
