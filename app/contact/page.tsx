@@ -7,7 +7,15 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Linkedin, Github, MapPin, Phone, Loader2 } from "lucide-react";
+import {
+  Mail,
+  Linkedin,
+  Github,
+  MapPin,
+  Phone,
+  Loader2,
+  FileText,
+} from "lucide-react";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { uiText } from "@/data/ui-text";
@@ -149,6 +157,21 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
+                <a
+                  href={siteConfig.socialLinks.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
+                  download
+                >
+                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <FileText className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Resume</p>
+                    <p className="font-medium">Download CV</p>
+                  </div>
+                </a>
 
                 <div className="mt-8 pt-8 border-t border-border">
                   <h3 className="text-sm font-semibold mb-4">

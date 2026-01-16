@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { homeContent } from "@/data/home";
 import { siteConfig } from "@/config/site";
@@ -42,9 +42,13 @@ export default function HomePage() {
             className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed text-pretty max-w-3xl"
           >
             {homeContent.heroDescription.prefix}{" "}
-            <span className="text-foreground font-semibold">{homeContent.heroDescription.technologies[0].text}</span>{" "}
+            <span className="text-foreground font-semibold">
+              {homeContent.heroDescription.technologies[0].text}
+            </span>{" "}
             {homeContent.heroDescription.technologies[1].text}{" "}
-            <span className="text-foreground font-semibold">{homeContent.heroDescription.technologies[2].text}</span>
+            <span className="text-foreground font-semibold">
+              {homeContent.heroDescription.technologies[2].text}
+            </span>
             {homeContent.heroDescription.suffix}
           </motion.p>
 
@@ -65,6 +69,17 @@ export default function HomePage() {
                 {homeContent.buttons.contactMe}
               </Button>
             </Link>
+            <a
+              href={siteConfig.socialLinks.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
+              <Button size="lg" variant="outline">
+                {homeContent.buttons.downloadCV}
+                <FileText className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
           </motion.div>
 
           <motion.div

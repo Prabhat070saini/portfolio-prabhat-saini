@@ -39,7 +39,7 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/prabhat-saini22/",
     twitter: "https://twitter.com/", // Placeholder if needed
     email: "mailto:Prabhat07saini@gmail.com",
-    resume: "/resume.pdf", // Placeholder
+    resume: "/api/resume/download", // Dynamic link
   },
 
   contactInfo: {

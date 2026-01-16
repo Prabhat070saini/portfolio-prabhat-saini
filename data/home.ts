@@ -14,6 +14,7 @@ export const homeContent = {
   buttons: {
     viewProjects: "View Projects",
     contactMe: "Contact Me",
+    downloadCV: "Download CV",
   },
   socialLinks: {
     github: {

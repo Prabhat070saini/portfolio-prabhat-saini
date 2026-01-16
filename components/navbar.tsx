@@ -60,6 +60,11 @@ export function Navbar() {
                 </Button>
               </Link>
             ))}
+            <Link href="/contact" className="ml-4">
+              <Button variant="default" size="sm">
+                Hire Me
+              </Button>
+            </Link>
             {/* Theme toggle button */}
             <Button
               variant="ghost"

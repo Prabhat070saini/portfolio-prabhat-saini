@@ -15,3 +15,10 @@ model ConnectionRequest {
   message        String
   createdAt      DateTime @default(now())
 }
+
+model Resume {
+  id         Int      @id @default(autoincrement())
+  resumeLink String
+  isActive   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
