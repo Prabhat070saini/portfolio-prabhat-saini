@@ -22,3 +22,26 @@ model Resume {
   isActive   Boolean  @default(false)
   createdAt  DateTime @default(now())
 }
+
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  name      String
+  contact   String   // Can be email or mobile number
+  feedback  String
+  createdAt DateTime @default(now())
+
+  // Relation to VisitorTracking
+  visitorId Int?
+  visitor   VisitorTracking? @relation(fields: [visitorId], references: [id])
+}
+
+model VisitorTracking {
+  id            Int        @id @default(autoincrement())
+  ipAddress     String     @unique
+  visitCount    Int        @default(1)
+  firstVisitAt  DateTime   @default(now())
+  lastVisitAt   DateTime   @default(now())
+
+  // Relation to Feedback - one visitor can have multiple feedbacks
+  feedbacks     Feedback[]
+}

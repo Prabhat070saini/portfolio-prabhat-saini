@@ -7,6 +7,7 @@ import {
 } from "@/lib/email-templates";
 import { contactInputSchema } from "@/lib/validations/contact";
 import { siteConfig } from "@/config/site";
+import { HTTP_STATUS, API_MESSAGES } from "@/lib/constants/api";
 
 export async function POST(request: Request) {
   try {
@@ -17,10 +18,10 @@ export async function POST(request: Request) {
     if (!validationResult.success) {
       return NextResponse.json(
         {
-          error: "Validation failed",
+          error: API_MESSAGES.contact.validationFailed,
           details: validationResult.error.flatten().fieldErrors,
         },
-        { status: 400 }
+        { status: HTTP_STATUS.BAD_REQUEST }
       );
     }
 
@@ -67,14 +68,14 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(
-      { message: "SUCCESS", data: null },
-      { status: 200 }
+      { message: API_MESSAGES.contact.success, data: null },
+      { status: HTTP_STATUS.OK }
     );
   } catch (error) {
     console.error("Error processing request:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
+      { error: API_MESSAGES.contact.sendError },
+      { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
     );
   }
 }
